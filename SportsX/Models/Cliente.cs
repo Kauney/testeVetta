@@ -26,6 +26,7 @@ namespace SportsX.Models
         [Required(ErrorMessage = "O Telefone é obrigatório", AllowEmptyStrings = false)]
         public string Telefone { get; set; }
 
+
         //public List<Telefone> Telefones { get; set; }
     }
 }
