@@ -4,12 +4,14 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
 
 namespace SportsX.Controllers
 {
     public class ClienteController : Controller
     {
         ClienteDbContext db;
+        Regex reg = new Regex((@"[^0-9]")); 
         public ClienteController()
         {
             db = new ClienteDbContext();
@@ -33,13 +35,13 @@ namespace SportsX.Controllers
         public ActionResult Create(ClienteViewModel model)
         {
             var cliente = new Cliente();
-            cliente.Identificador = model.Identificador;
+            cliente.Identificador = reg.Replace(model.Identificador, string.Empty);
             cliente.Nome = model.Nome;
-            cliente.CEP = model.CEP;
+            cliente.CEP = reg.Replace(model.CEP, string.Empty);
             cliente.Email = model.Email;
             cliente.Classificacao = model.Classificacao;
             cliente.tipo = model.tipo;
-            cliente.Telefone = model.Telefone;
+            cliente.Telefone = reg.Replace(model.Telefone, string.Empty);
 
             db.Clientes.Add(cliente);
             db.SaveChanges();
@@ -75,13 +77,13 @@ namespace SportsX.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                cliente.Identificador = model.Identificador;
+                cliente.Identificador = reg.Replace(model.Identificador, string.Empty);
                 cliente.Nome = model.Nome;
-                cliente.CEP = model.CEP;
+                cliente.CEP = reg.Replace(model.CEP, string.Empty);
                 cliente.Email = model.Email;
                 cliente.Classificacao = model.Classificacao;
                 cliente.tipo = model.tipo;
-                cliente.Telefone = model.Telefone;
+                cliente.Telefone = reg.Replace(model.Telefone, string.Empty);
 
                 db.SaveChanges();
                 return RedirectToAction("Index");

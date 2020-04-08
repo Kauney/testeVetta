@@ -1,86 +1,110 @@
 ﻿@model SportsX.Models.ClienteViewModel
 
-@{ 
-var listClassificacao = new[]
-{
-    new SelectListItem { Value = "", Text = "Selecione" },
-    new SelectListItem { Value = "0", Text = "Ativo" },
-    new SelectListItem { Value = "1", Text = "Inativo" },
-    new SelectListItem { Value = "2", Text = "Preferencial" },
-};
-}
-<h1>Novo Produto</h1>
+<h1>Novo Cliente</h1>
 <hr />
 @using (Html.BeginForm("Create", "Cliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-<div class="form-horizontal">
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nome, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Nome,
-                               new { @class = "form-control", @placeholder = "Nome do Cliente" })
-            @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Nome,
+                                   new { @class = "form-control", @placeholder = "Nome do Cliente" })
+                @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.tipo, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.tipo,
-                               new { @class = "form-control", @placeholder = "CPF/CNPJ" })
-            @Html.ValidationMessageFor(m => m.tipo, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+                @Html.RadioButtonFor(m => m.tipo, "0", new { @checked = true, @class="tipo" }) @Html.Label("Pessoa Física")
+                @Html.RadioButtonFor(m => m.tipo, "1", new { @class = "tipo" }) @Html.Label("Pessoa Jurídica")
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Identificador, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Identificador,
-                               new { @class = "form-control", @placeholder = "CPF/CNPJ" })
-            @Html.ValidationMessageFor(m => m.Identificador, "", new { @class = "text-danger" })
+        @*
+            @Html.LabelFor(m => m.tipo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.tipo,
+                                   new { @class = "form-control", @placeholder = "CPF/CNPJ" })
+                @Html.ValidationMessageFor(m => m.tipo, "", new { @class = "text-danger" })
+            </div>
+        *@
+        <div class="form-group">
+            @Html.LabelFor(m => m.Identificador, new { @class = "control-label col-md-2 labelIdentificador" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Identificador,
+                                   new { @class = "form-control", @placeholder = "CPF/CNPJ" })
+                @Html.ValidationMessageFor(m => m.Identificador, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.CEP, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.CEP,
-                               new { @class = "form-control", @placeholder = "CEP" })
-            @Html.ValidationMessageFor(m => m.CEP, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.CEP, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CEP,
+                                   new { @class = "form-control", @placeholder = "CEP" })
+                @Html.ValidationMessageFor(m => m.CEP, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger"})
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Classificacao, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Classificacao, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Classificacao, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Telefone, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Telefone, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    @*
         <div class="form-group">
             @Html.LabelFor(m => m.Classificacao, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Email,
-                                   new SelectList(viewbag.listClassificacao, "Ativo", "Ativo"),
-                                   "Escolha a categoria", new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Classificacao,
+                                   new List<SelectListItem>{
+                                                new SelectListItem{ Text="Ativo", Value = "1" },
+                                                new SelectListItem{ Text="Inativo", Value = "2" },
+                                                new SelectListItem{ Text="Preferencial", Value = "3" },
+                                                },
+                                   "Escolha a Classificação", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Classificacao, "", new { @class = "text-danger" })
             </div>
-        </div>*@
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Salvar Cliente" class="btn btn-success" />
-            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar Cliente" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
         </div>
     </div>
-</div>
 }
 <div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/inputmask")
+    @Scripts.Render("~/scripts/CustomValidation.js")
+    <script>
+        $(document).ready(function () {
+            $('#Identificador').inputmask("mask", { "mask": "999.999.999-99" });
+            $('#CEP').inputmask("mask", { "mask": "99.999-999" });
+            $('#Telefone').inputmask("mask", { "mask": "(99) 9999-99999" });
+            $(".tipo").click(function () {
+                if ($(this).val() == "0") {
+                    $('#Identificador').inputmask("mask", { "mask": "999.999.999-99" });
+                    $('.labelIdentificador').text("CPF");
+                    $('#Identificador').attr("placeholder", "CPF");
+                } else {
+                    $('#Identificador').inputmask("mask", { "mask": "99.999.999/9999-99" });
+                    $('.labelIdentificador').text("CNPJ");
+                    $('#Identificador').attr("placeholder", "CNPJ");
+                }
+            });
+        });
+    </script>
 }
+

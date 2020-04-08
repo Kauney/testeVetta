@@ -18,11 +18,11 @@ namespace SportsX.Models
         [Required(ErrorMessage = "O email é obrigatório", AllowEmptyStrings = false)]
         public string Email { get; set; }
         [Required(ErrorMessage = "A classificação é obrigatória", AllowEmptyStrings = false)]
-        //Refere ao classificação do cliente 0=Ativo, 1=Inativo, 2=Preferencial
-        public int Classificacao { get; set; }
+        //Refere ao classificação do cliente 1=Ativo, 2=Inativo, 3=Preferencial
+        public byte Classificacao { get; set; }
         [Required(ErrorMessage = "O tipo é obrigatório", AllowEmptyStrings = false)]
         //Refere ao tipo do cliente 0=Pessoa Física, 1=PessoaJurídica
-        public int tipo { get; set; }
+        public byte tipo { get; set; }
         [Required(ErrorMessage = "O Telefone é obrigatório", AllowEmptyStrings = false)]
         public string Telefone { get; set; }
 
